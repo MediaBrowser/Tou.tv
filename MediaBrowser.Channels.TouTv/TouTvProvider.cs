@@ -6,6 +6,7 @@ using MediaBrowser.Channels.TouTv.TouTvApi;
 using MediaBrowser.Controller.Channels;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Model.Channels;
+using MediaBrowser.Model.Dto;
 
 namespace MediaBrowser.Channels.TouTv
 {
@@ -45,13 +46,13 @@ namespace MediaBrowser.Channels.TouTv
             return CreateChannelItemInfos(section.SeasonLineups);
         }
 
-        public async Task<IEnumerable<ChannelMediaInfo>> GetEpisode(string url, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MediaSourceInfo>> GetEpisode(string url, CancellationToken cancellationToken)
         {
             var section = await _presentationService.GetSection(url, cancellationToken);
             var videoUrl = await _mediaValidationV1Service.GetVideoUrl(section.IdMedia, cancellationToken);
-            return new List<ChannelMediaInfo>
+            return new List<MediaSourceInfo>
             {
-                new ChannelMediaInfo { Path = videoUrl.Url }
+                new ChannelMediaInfo { Path = videoUrl.Url }.ToMediaSource()
             };
         }
 

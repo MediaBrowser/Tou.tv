@@ -13,6 +13,7 @@ using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Reflection;
 using MediaBrowser.Model.Serialization;
+using MediaBrowser.Model.Dto;
 
 namespace MediaBrowser.Channels.TouTv
 {
@@ -112,7 +113,7 @@ namespace MediaBrowser.Channels.TouTv
             get { return ChannelParentalRating.GeneralAudience; }
         }
 
-        public async Task<IEnumerable<ChannelMediaInfo>> GetChannelItemMediaInfo(string id, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MediaSourceInfo>> GetChannelItemMediaInfo(string id, CancellationToken cancellationToken)
         {
             return await _touTvProvider.GetEpisode(id, cancellationToken);
         }
