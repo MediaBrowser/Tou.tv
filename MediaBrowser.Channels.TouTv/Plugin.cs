@@ -5,10 +5,12 @@ using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
+using System.IO;
+using MediaBrowser.Model.Drawing;
 
 namespace MediaBrowser.Channels.TouTv
 {
-    public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
+    public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages, IHasThumbImage
     {
         internal static string ChannelName = "ICI Tou.tv";
 
@@ -38,6 +40,20 @@ namespace MediaBrowser.Channels.TouTv
                     EmbeddedResourcePath = GetType().Namespace + ".Configuration.configPage.html"
                 }
             };
+        }
+
+        public Stream GetThumbImage()
+        {
+            var type = GetType();
+            return type.Assembly.GetManifestResourceStream(type.Namespace + ".thumb.png");
+        }
+
+        public ImageFormat ThumbImageFormat
+        {
+            get
+            {
+                return ImageFormat.Png;
+            }
         }
 
         public override string Description

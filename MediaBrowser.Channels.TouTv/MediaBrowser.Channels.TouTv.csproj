@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.3;</TargetFrameworks>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,7 @@
     <None Remove="Images\Backdrop.jpg" />
     <None Remove="Images\Logo.png" />
     <None Remove="Images\Thumb.jpg" />
+    <None Remove="thumb.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,10 +19,12 @@
     <EmbeddedResource Include="Images\Backdrop.jpg" />
     <EmbeddedResource Include="Images\Logo.png" />
     <EmbeddedResource Include="Images\Thumb.jpg" />
+    <EmbeddedResource Include="thumb.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="mediabrowser.server.core" Version="3.3.21-beta" />
+    <PackageReference Include="mediabrowser.server.core" Version="3.6.0.36-beta" />
+    <PackageReference Include="System.Memory" Version="4.5.1" />
   </ItemGroup>
 
 </Project>
