@@ -45,14 +45,14 @@ namespace MediaBrowser.Channels.TouTv
         public Stream GetThumbImage()
         {
             var type = GetType();
-            return type.Assembly.GetManifestResourceStream(type.Namespace + ".thumb.png");
+            return type.Assembly.GetManifestResourceStream(type.Namespace + ".thumb.jpg");
         }
 
         public ImageFormat ThumbImageFormat
         {
             get
             {
-                return ImageFormat.Png;
+                return ImageFormat.Jpg;
             }
         }
 
