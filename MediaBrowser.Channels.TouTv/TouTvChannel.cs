@@ -11,7 +11,6 @@ using MediaBrowser.Model.Channels;
 using MediaBrowser.Model.Drawing;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Logging;
-using MediaBrowser.Model.Reflection;
 using MediaBrowser.Model.Serialization;
 using MediaBrowser.Model.Dto;
 
@@ -21,16 +20,14 @@ namespace MediaBrowser.Channels.TouTv
     {
         private readonly ILogger _logger;
         private readonly TouTvProvider _touTvProvider;
-        private IAssemblyInfo _assemblyInfo;
 
-        public TouTvChannel(ILogManager logManager, IHttpClient httpClient, IJsonSerializer jsonSerializer, IAssemblyInfo assemblyInfo)
+        public TouTvChannel(ILogManager logManager, IHttpClient httpClient, IJsonSerializer jsonSerializer)
         {
             _logger = logManager.GetLogger(GetType().Name);
 
             var presentationService = new PresentationService(httpClient, jsonSerializer);
             var mediaValidationV1Service = new MediaValidationV1Service(httpClient, jsonSerializer);
             _touTvProvider = new TouTvProvider(presentationService, mediaValidationV1Service);
-            _assemblyInfo = assemblyInfo;
         }
 
         public InternalChannelFeatures GetChannelFeatures()
@@ -125,7 +122,7 @@ namespace MediaBrowser.Channels.TouTv
             {
                 Format = ImageFormat.Jpg,
                 HasImage = true,
-                Stream = _assemblyInfo.GetManifestResourceStream(GetType(), path)
+                Stream = GetType().Assembly.GetManifestResourceStream(path)
             });
         }
 
